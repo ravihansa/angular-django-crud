@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-6">          
+    <form #companyForm="ngForm" (ngSubmit)="onSubmit(companyForm)">
+    <div class="form-group user-image">
+      <a>
+        <div class="user-image" *ngIf="logoUrl$ as url; else imgBlock">
+          <img class="center" id="profile-pic" [src]="url" alt="My Image">
+        </div>        
+      </a>
+      <ng-template #imgBlock>
+          <div class="user-image">
+            <img class="center" id="profile-pic" [src]="imageUrl" alt="My Image">
+          </div>
+      </ng-template> 
+    </div>
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="companyService.selectedCompany.id">
+    <div class="form-group">
+      <label>Company Name</label>
+      <input class="form-control" name="name" #name="ngModel" [(ngModel)]="companyService.selectedCompany.name" placeholder="Company Name" required>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input class="form-control" name="email" #email="ngModel" [(ngModel)]="companyService.selectedCompany.email" placeholder="Email" required [pattern]="emailRegex">
+    </div>    
+    <div class="form-group">
+      <label>WebSite</label>
+      <input class="form-control" name="webSite" #webSite="ngModel" [(ngModel)]="companyService.selectedCompany.webSite" placeholder="WebSite">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-default" type="submit" [disabled]="!companyForm.valid">
+        <i class="fa fa-floppy-o"></i>
+        Submit</button>
+      <button class="btn btn-default" type="button" (click)="resetForm()">
+        <i class="fa fa-repeat"></i>
+        Reset</button>
+    </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <h6 *ngIf="!comMessage" class="text-center">Registered Companies</h6><br/>
+    <h6 *ngIf="comMessage" class="text-center alert alert-danger" role="alert">{{ comMessage }}</h6><br/>
+    <table class="table table-sm table-hover">
+      <tr *ngFor="let company of companyService.companies">
+          <td>{{company.name}}</td>
+          <td>{{company.email}}</td>
+          <td>
+            <a class="btn" (click)="Image.click()">
+              <i class="fa fa-upload"></i>
+              <input hidden type="file" name="logo" #Image accept="image/*" (change)="uploadCompanyLogo($event, company.id, company)">
+            </a>
+            <a class="btn" (click)="onEdit(company)">
+              <i class="fa fa-pencil-square-o"></i>
+            </a>
+            <a class="btn" (click)="onDelete(company.id)">
+              <i class="fa fa-trash-o"></i>
+            </a>
+            <a class="btn" (click)="addEmployee(company.id)">
+              <i class="fa fa-user-plus"></i>
+            </a>
+          </td>
+      </tr>
+    </table>
+  </div>
+</div>
