@@ -23,11 +23,11 @@ export class EmployeeComponent implements OnInit {
   phoneRegex = '[0-9]{10}';
 
   constructor(private router: Router,
-              private route: ActivatedRoute,
-              private toastr: ToastrService,
-              private httpClient: HttpClient,
-              private spinner: NgxSpinnerService,
-              private employeeService: EmployeeService, ) { }
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
+    private httpClient: HttpClient,
+    private spinner: NgxSpinnerService,
+    private employeeService: EmployeeService, ) { }
 
   ngOnInit() {
     this.companyId = this.route.snapshot.paramMap.get('companyId');
@@ -57,20 +57,20 @@ export class EmployeeComponent implements OnInit {
         this.refreshEmployeeList();
         this.toastr.success('Successfully Saved!');
       },
-      err => {
-        this.toastr.error(err.error);
-        console.log(err);
-      });
+        err => {
+          this.toastr.error(err.error);
+          console.log(err);
+        });
     } else {
       this.employeeService.updateEmployee(form.value.id, form.value).subscribe((res) => {
         this.resetForm();
         this.refreshEmployeeList();
         this.toastr.success('Successfully Updated!');
       },
-      err => {
-        this.toastr.error('Error!');
-        console.log(err);
-      });
+        err => {
+          this.toastr.error('Error!');
+          console.log(err);
+        });
     }
   }
 
@@ -85,31 +85,29 @@ export class EmployeeComponent implements OnInit {
         this.refreshEmployeeList();
         this.toastr.success('Successfully Deleted!');
       },
-      err => {
-        this.toastr.error('Error!');
-        console.log(err);
-      });
+        err => {
+          this.toastr.error('Error!');
+          console.log(err);
+        });
     }
   }
 
   refreshEmployeeList() {
     this.employeeService.getEmployeeList(this.companyId).subscribe((res) => {
-      if (res['status']) {
-        if (res['data']['employee']) {
-          this.employeeList = [];
-          for (let i in res['data']['employee']) {
-            const data: Employee = {
-              id: res['data']['employee'][i]['id'],
-              firstName: res['data']['employee'][i]['first_name'],
-              lastName: res['data']['employee'][i]['last_name'],
-              email: res['data']['employee'][i]['email'],
-              phoneNo: res['data']['employee'][i]['phone_number'],
-              companyId: res['data']['employee'][i]['company_id']
-            };
-            this.employeeList.push(data);
-          }
-          this.employeeService.employees = this.employeeList;
+      if (res) {
+        this.employeeList = [];
+        for (let i in res) {
+          const data: Employee = {
+            id: res[i]['id'],
+            firstName: res[i]['firstName'],
+            lastName: res[i]['lastName'],
+            email: res[i]['email'],
+            phoneNo: res[i]['phoneNo'],
+            companyId: res[i]['companyId']
+          };
+          this.employeeList.push(data);
         }
+        this.employeeService.employees = this.employeeList;
       }
       if (this.employeeService.employees.length === 0) {
         this.empMessage = 'No employees added';
@@ -117,10 +115,10 @@ export class EmployeeComponent implements OnInit {
         this.empMessage = '';
       }
     },
-    err => {
-      this.toastr.error('Error!');
-      console.log(err);
-    });
+      err => {
+        this.toastr.error('Error!');
+        console.log(err);
+      });
   }
 
 }

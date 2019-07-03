@@ -75,7 +75,7 @@ export class CompanyComponent implements OnInit {
 
   onEdit(company: Company) {
     this.companyService.selectedCompany = Object.assign({}, company);
-    this.getCompanyLogoUrl(company.id);
+    // this.getCompanyLogoUrl(company.id);
   }
 
   onDelete(id: string) {
@@ -101,8 +101,8 @@ export class CompanyComponent implements OnInit {
             id: res[i]['id'],
             name: res[i]['name'],
             email: res[i]['email'],
-            webSite: res[i]['web_site'],
-            logoPath: res[i]['logo_path']
+            webSite: res[i]['webSite'],
+            logoPath: res[i]['logoPath']
           };
           this.companyList.push(data);
         }

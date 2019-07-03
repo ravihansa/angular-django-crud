@@ -5,8 +5,7 @@ from .models import Employee
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ('id', 'company_id', 'first_name', 'last_name', 'email',
-                  'phone_number')
+        fields = ("id", "companyId", "firstName", "lastName", "email", "phoneNo")
 
     def create(self, validated_data):
         instance = Employee.objects.create(**validated_data)

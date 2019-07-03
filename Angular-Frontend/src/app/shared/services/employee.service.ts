@@ -16,19 +16,19 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   saveEmployee(employee: Employee) {
-    return this.http.post(environment.apiBaseUrl + '/saveemployee', employee);
+    return this.http.post(environment.apiBaseUrl + '/employee/', employee);
   }
 
   getEmployeeList(id: string) {
-    return this.http.get(environment.apiBaseUrl + '/loademployee' + `/${id}`);
+    return this.http.get(environment.apiBaseUrl + '/employee/company' + `/${id}/`);
   }
 
   updateEmployee(id: string, employee: Employee) {
-    return this.http.put(environment.apiBaseUrl + '/updateemployee' + `/${id}`, employee);
+    return this.http.put(environment.apiBaseUrl + '/employee' + `/${id}/`, employee);
   }
 
   deleteEmployee(id: string) {
-    return this.http.delete(environment.apiBaseUrl + '/deleteemployee' + `/${id}`);
+    return this.http.delete(environment.apiBaseUrl + '/employee' + `/${id}/`);
   }
 
 }

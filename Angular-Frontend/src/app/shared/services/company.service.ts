@@ -23,15 +23,15 @@ export class CompanyService {
   }
 
   updateCompany(id: string, company: Company) {
-    return this.http.put(environment.apiBaseUrl + '/company/' + `/${id}`, company);
+    return this.http.put(environment.apiBaseUrl + '/company' + `/${id}/`, company);
   }
 
   deleteCompany(id: string) {
-    return this.http.delete(environment.apiBaseUrl + '/company/' + `/${id}`);
+    return this.http.delete(environment.apiBaseUrl + '/company' + `/${id}/`);
   }
 
   getCompany(id: string) {
-    return this.http.get(environment.apiBaseUrl + '/company' + `/${id}`);
+    return this.http.get(environment.apiBaseUrl + '/company' + `/${id}/`);
   }
 
 }

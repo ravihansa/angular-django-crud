@@ -23,7 +23,7 @@ export class EmployeesComponent implements OnInit {
   getCompanyName(id: string) {
     this.companyService.getCompany(id).subscribe((res) => {
      // tslint:disable-next-line:no-string-literal
-     this.companyName = res['company']['name'];
+     this.companyName = res['name'];
     },
     err => {
       console.log(err);
