@@ -3,11 +3,14 @@ from django.urls import path
 
 from django.conf import settings
 from django.conf.urls import url, include
+# from rest_framework_simplejwt import views as jwt_views
+# from backend.user.authentication import TokenAuthentication as auth_token
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('backend.company.urls')),
-    url(r'^api/employee/', include('backend.employee.urls')),
+    url(r"^admin/", admin.site.urls),
+    url(r"^api/", include("backend.company.urls")),
+    url(r"^api/employee/", include("backend.employee.urls")),
+    url(r"^api/user/", include("backend.user.urls")),
     # url(r'^api/', include('backend.employee.urls')),
 ]
 """backend URL Configuration

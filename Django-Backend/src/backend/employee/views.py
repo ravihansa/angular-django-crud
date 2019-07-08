@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.db.models import Q
-from rest_framework import viewsets
 from rest_framework import generics, mixins
-from rest_framework.views import APIView
-from django.http import Http404
-from rest_framework.response import Response
+
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from backend.user.authentication import TokenAuthentication
+
+# from rest_framework import viewsets
+# from rest_framework.views import APIView
+# from django.http import Http404
+# from rest_framework.response import Response
 
 from .models import Employee
 from .serializers import EmployeeSerializer
@@ -52,6 +56,8 @@ class EmployeeRUDview(generics.RetrieveUpdateDestroyAPIView):
 
 
 class EmployeeRetrieveview(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    # authentication_classes = [TokenAuthentication]
     lookup_field = "companyId"
     serializer_class = EmployeeSerializer
 
@@ -62,4 +68,14 @@ class EmployeeRetrieveview(generics.ListAPIView):
         return Employee.objects.filter(companyId=companyId)
 
 
+# class EmployeeRetrieveview(APIView):
+#     def get_object(self, companyId):
+#         try:
+#             return Employee.objects.get(companyId=companyId)
+#         except Employee.DoesNotExist:
+#             raise Http404
 
+#     def get(self, request, companyId, format=None):
+#         employee = self.get_object(companyId)
+#         serializer = EmployeeSerializer(employee)
+#         return Response(serializer.data)

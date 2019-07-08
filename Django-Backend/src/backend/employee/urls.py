@@ -6,7 +6,6 @@ from .views import EmployeeRUDview, EmployeeAPIview, EmployeeRetrieveview
 
 # router = routers.DefaultRouter()
 # router.register(r'employee', EmployeeViewSet)
-
 # urlpatterns = router.urls
 
 urlpatterns = [
