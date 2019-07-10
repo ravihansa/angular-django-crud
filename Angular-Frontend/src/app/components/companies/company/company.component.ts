@@ -75,7 +75,7 @@ export class CompanyComponent implements OnInit {
 
   onEdit(company: Company) {
     this.companyService.selectedCompany = Object.assign({}, company);
-    // this.getCompanyLogoUrl(company.id);
+    this.getCompanyLogoUrl(company.id);
   }
 
   onDelete(id: string) {
@@ -152,13 +152,14 @@ export class CompanyComponent implements OnInit {
       const formData: FormData = new FormData();
 
       formData.append('logo', file, file.name);
+      formData.append('fileName', file.name);
       formData.append('companyId', companyId);
 
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'multipart/form-data');
       headers.append('Accept', 'application/json');
 
-      const uploadurl = environment.apiBaseUrl + '/uploadcompanylogo';
+      const uploadurl = environment.apiBaseUrl + '/companylogo/' + companyId + '/';
 
       this.httpClient.post(uploadurl, formData, { headers })
         .subscribe(
@@ -179,7 +180,7 @@ export class CompanyComponent implements OnInit {
   getCompanyLogoUrl(id: string) {
     this.companyService.getCompany(id).subscribe((res) => {
       // tslint:disable-next-line:no-string-literal
-      this.logoUrl$ = res['company']['logo_path'];
+      this.logoUrl$ = res['url'];
     },
       err => {
         console.log(err);

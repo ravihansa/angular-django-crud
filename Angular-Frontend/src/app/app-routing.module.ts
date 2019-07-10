@@ -24,12 +24,12 @@ const routes: Routes = [
   {
     path: 'home', component: CompaniesComponent,
     children: [{ path: ':somePath', component: CompaniesComponent }],
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'home/employees/:companyId', component: EmployeesComponent,
     children: [{ path: ':somePath', component: EmployeesComponent }],
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   }
 ];
 

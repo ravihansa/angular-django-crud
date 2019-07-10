@@ -25,6 +25,7 @@ from .serializers import EmployeeSerializer
 
 
 class EmployeeAPIview(mixins.CreateModelMixin, generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
     lookup_field = "pk"
     serializer_class = EmployeeSerializer
 
@@ -48,6 +49,7 @@ class EmployeeAPIview(mixins.CreateModelMixin, generics.ListAPIView):
 
 
 class EmployeeRUDview(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
     lookup_field = "pk"  # instead of pk, can use id
     serializer_class = EmployeeSerializer
 

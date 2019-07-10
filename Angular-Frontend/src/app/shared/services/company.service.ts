@@ -31,7 +31,7 @@ export class CompanyService {
   }
 
   getCompany(id: string) {
-    return this.http.get(environment.apiBaseUrl + '/company' + `/${id}/`);
+    return this.http.get(environment.apiBaseUrl + '/companylogodownload' + `/${id}/`);
   }
 
 }
